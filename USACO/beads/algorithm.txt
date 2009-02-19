@@ -1,0 +1,55 @@
+//s is a n length string with 'r' 'b' and 'w'
+//s:1...n
+CollectBrokenNeclace(s, n)
+maxSeriesBeads = 0;
+posBroken = 0;
+
+//only included one color of the RED and BLUE
+//find: 0 denotes no found
+redBeginPos <- FIND(RED)
+blueBeginPos <- FIND(BLUE)
+if  redBeginPos = 0 or blueBeginPos = 0
+	then return n
+//the substring of the first corlor end position
+if redBeginPos < blueBeginPos
+	then pos <- blueBeginPos - 1
+	else pos <- redBeginPos - 1
+
+firstLeft <- CollectFirstLeftBeads(pos) //include pos
+left <- firstLeft
+newEnding = n - (firstLeft-pos)
+
+for i <- pos to newEnding
+	right <- CollectRightBeads(i+1)
+	if left+right > maxSeriesBeads
+		then maxSeriesBeads = left+right
+			 posBroken = i
+	i <- i+right
+	left <- right
+
+return maxSeriesBeads
+
+
+//color is red or blue
+CollectFirstLeftBeads(s, n, pos)
+{
+	count <- pos;
+	i <- n;
+	while s[i] = s[pos] or s[i] = WHITE
+		do  count <- count + 1
+			i <- i-1
+	return count;
+}
+
+CollectRightBeads(s, n, pos)
+{
+	count = 0;
+	color <- s[pos]
+	i <- pos;
+	while s[i] = color or s[i] = WHITE
+		do count <- count + 1
+		   i <- i+1
+		   if i > n
+				then i <- 1
+	return count
+}
