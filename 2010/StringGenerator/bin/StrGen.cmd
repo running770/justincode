@@ -25,6 +25,6 @@ SET ENDCOL=5
 SET OUTPUTDIR=output
 
 java -jar StringGenerator.jar %INPUT% %SHEETNAME% %STARTCOL% %ENDCOL% %ENCODING% %OUTPUTDIR%
-rename %OUTPUTDIR%\lang.h %OUTPUTDIR%\gmi_lang.h
+rename %OUTPUTDIR%\lang.h gmi_lang.h
 
 pause
